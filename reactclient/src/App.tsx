@@ -1,11 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Login from "./Login";
 
 import axios from "axios";
 import Profile from "./Profile";
-import { Alert, AlertProps } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 
 type Props = {};
 
@@ -64,7 +63,6 @@ class App extends React.Component<Props, State> {
       username,
       password
     });
-    console.log(response);
     if (response.status === 200) {
       localStorage.setItem("access_token", response.data.token);
       this.setState({
@@ -117,7 +115,6 @@ class App extends React.Component<Props, State> {
         }
       }
     );
-    console.log(response);
     if (response.status === 200) {
       this.setState({
         alerts: [{ type: "success", message: "Profile updated successfully" }]

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import { Form, Button, Row } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { User } from "./App";
 
 type Props = {
@@ -59,7 +59,6 @@ class Profile extends React.Component<Props, State> {
   render() {
     return (
       <div style={styles.container}>
-        <div style={styles.subContainer}>
           <Form style={styles.form}>
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -112,7 +111,6 @@ class Profile extends React.Component<Props, State> {
               Update
             </Button>
           </Form>
-        </div>
       </div>
     );
   }
@@ -124,10 +122,6 @@ const styles = {
     alignItems: "center",
     display: "flex",
     height: "100%"
-  },
-  subContainer: {
-    justifyContent: "center",
-    display: "flex"
   },
   form: {
     width: 500
