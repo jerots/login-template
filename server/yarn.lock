@@ -241,6 +241,12 @@ encodeurl@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.2.tgz#ad3ff4c86ec2d029322f5a02c3a9a606c95b3f59"
 
+env-var@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/env-var/-/env-var-4.0.1.tgz#b946044df51bb0ff6d9013e4d45ecb1470059019"
+  dependencies:
+    is-url "~1.2.2"
+
 es6-shim@0.35.3:
   version "0.35.3"
   resolved "https://registry.yarnpkg.com/es6-shim/-/es6-shim-0.35.3.tgz#9bfb7363feffff87a6cdb6cd93e405ec3c4b6f26"
@@ -371,6 +377,10 @@ is-bluebird@^1.0.2:
 is-property@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-property/-/is-property-1.0.2.tgz#57fe1c4e48474edd65b09911f26b1cd4095dda84"
+
+is-url@~1.2.2:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
 
 isarray@~1.0.0:
   version "1.0.0"
