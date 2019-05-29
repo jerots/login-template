@@ -6,6 +6,7 @@ export let sql: Connection;
 
 
 export async function initSQL() {
+  console.log(SQL_DB)
   const connection = await mysql.createConnection({
     host: SQL_HOST,
     user: SQL_USERNAME,

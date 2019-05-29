@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+
 import Login from "./Login";
 
 import axios from "axios";
@@ -59,29 +59,28 @@ class App extends React.Component<Props, State> {
   async login(username: string, password: string) {
     try {
 
-    const response = await axios.post("http://localhost:5000/login", {
-      username,
-      password
-    });
-    if (response.status === 200) {
-      localStorage.setItem("access_token", response.data.token);
-      this.setState({
-        authenticated: true,
-        alerts: [{ type: "success", message: "Logged in successfully" }]
+      const response = await axios.post("http://localhost:5000/login", {
+        username,
+        password
       });
-    } else {
-      // handle others
+      console.log(response);
+      if (response && response.status === 200) {
+        localStorage.setItem("access_token", response.data.token);
+        this.setState({
+          authenticated: true,
+          alerts: [{ type: "success", message: "Logged in successfully" }]
+        });
+      } else {
+        // handle others
+        this.setState({
+          alerts: [{ type: "danger", message: "Invalid username/password" }]
+        });
+      }
+    } catch (err) {
       this.setState({
         alerts: [{ type: "danger", message: "Invalid username/password" }]
       });
     }
-  } catch (err){
-    this.setState({
-      alerts: [{ type: "danger", message: "Invalid username/password" }]
-    });
-  }
-
-   
   }
 
   async getProfile() {

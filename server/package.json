@@ -18,6 +18,6 @@
     "@types/sequelize": "^4.28.2"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js --env .env"
   }
 }
