@@ -1,9 +1,7 @@
 import mysql, { Connection } from "mysql";
-import { SQL_DB, SQL_USERNAME, SQL_HOST, SQL_PASSWORD } from "./env";
+import { SQL_DB, SQL_USERNAME, SQL_HOST, SQL_PASSWORD } from "../env";
 
 export let sql: Connection;
-
-
 
 export async function initSQL() {
   console.log(SQL_DB)

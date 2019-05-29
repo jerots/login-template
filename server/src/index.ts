@@ -1,7 +1,6 @@
 import express from "express";
-import { initSQL, sql } from "./sql";
+import { initSQL, sql } from "./models/sql";
 
-import jwt from "jsonwebtoken";
 
 import * as _ from "lodash";
 import bodyParser = require("body-parser");

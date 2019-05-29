@@ -1,5 +1,5 @@
 import { Request, Response } from "express-serve-static-core";
-import { sql } from "../../sql";
+import { sql } from "../../models/sql";
 
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../env";
