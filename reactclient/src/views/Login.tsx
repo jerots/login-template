@@ -3,10 +3,12 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { connect } from "react-redux";
-import { login } from "../redux/actions";
+import { login, addAlertsFresh } from "../redux/actions";
+import { Alert } from "../redux/types";
 
 type Props = {
-  login: (isLoggedIn: boolean) => void
+  login: (isLoggedIn: boolean) => void;
+  addAlertsFresh: (alerts: Alert[]) => void;
 };
 
 type State = {
@@ -34,19 +36,28 @@ class Login extends React.Component<Props, State> {
       if (response && response.status === 200) {
         localStorage.setItem("access_token", response.data.token);
         this.props.login(true);
-        // this.setState({
-        //   alerts: [{ type: "success", message: "Logged in successfully" }]
-        // });
+        this.props.addAlertsFresh([
+          {
+            type: "success",
+            message: "Logged in successfully"
+          }
+        ]);
       } else {
         // handle others
-        // this.setState({
-        //   alerts: [{ type: "danger", message: "Invalid username/password" }]
-        // });
+        this.props.addAlertsFresh([
+          {
+            type: "danger",
+            message: "Invalid username/password"
+          }
+        ]);
       }
     } catch (err) {
-      // this.setState({
-      //   alerts: [{ type: "danger", message: "Invalid username/password" }]
-      // });
+      this.props.addAlertsFresh([
+        {
+          type: "danger",
+          message: "Invalid username/password"
+        }
+      ]);
     }
   }
 
@@ -119,5 +130,5 @@ const styles = {
 
 export default connect(
   null,
-  { login }
+  { login, addAlertsFresh }
 )(Login);

@@ -3,8 +3,12 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { User } from "../App";
 import axios from "axios";
+import { addAlertsFresh } from "../redux/actions";
+import { Alert } from "../redux/types";
+import { connect } from "react-redux";
 
 type Props = {
+  addAlertsFresh: (alerts: Alert[]) => void;
 };
 
 type State = {
@@ -96,14 +100,20 @@ class Profile extends React.Component<Props, State> {
       }
     );
     if (response.status === 200) {
-      // this.setState({
-      //   alerts: [{ type: "success", message: "Profile updated successfully" }]
-      // });
+      this.props.addAlertsFresh([
+        {
+          type: "success",
+          message: "Profile updated successfully"
+        }
+      ]);
     } else {
       //TODO: handle others
-      // this.setState({
-      //   alerts: [{ type: "danger", message: "Profile failed to update" }]
-      // });
+      this.props.addAlertsFresh([
+        {
+          type: "danger",
+          message: "Profile failed to update"
+        }
+      ]);
     }
   }
 
@@ -181,4 +191,7 @@ const styles = {
   }
 };
 
-export default Profile;
+export default connect(
+  null,
+  { addAlertsFresh }
+)(Profile);
