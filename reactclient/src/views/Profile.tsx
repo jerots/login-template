@@ -99,6 +99,7 @@ class Profile extends React.Component<Props, State> {
         }
       }
     );
+    console.log(response);
     if (response.status === 200) {
       this.props.addAlertsFresh([
         {

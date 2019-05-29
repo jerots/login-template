@@ -16,27 +16,12 @@ export type User = {
   profilePictureURL: string;
 };
 
-type State = {
-  authenticated: boolean;
-  user: User;
-};
+type State = {};
 
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const token = localStorage.getItem("access_token");
-    // TODO: check token validity
-    const authenticated = !!token;
-    this.state = {
-      authenticated,
-      user: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        profilePictureURL: ""
-      }
-    };
     this.renderAlerts = this.renderAlerts.bind(this);
   }
 

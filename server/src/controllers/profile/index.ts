@@ -47,6 +47,7 @@ export default {
       profilePictureURL: profile_picture_url
     };
     await updateUser(user);
+    res.sendStatus(200);
 
   }
 };

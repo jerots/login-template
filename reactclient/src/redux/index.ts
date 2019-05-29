@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux";
+import { createStore } from "redux";
 import { combinedReducer } from "./reducers/combinedReducer";
 
 // Create a Redux store holding the state of your app.
