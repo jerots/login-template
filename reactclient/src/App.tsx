@@ -1,12 +1,16 @@
 import React from "react";
 
-import Login from "./Login";
+import Login from "./views/Login";
 
 import axios from "axios";
-import Profile from "./Profile";
+import Profile from "./views/Profile";
 import { Alert } from "react-bootstrap";
+import { connect } from "react-redux";
+import { AppState } from "./redux/reducers/combinedReducer";
 
-type Props = {};
+type Props = AppState & {
+
+};
 
 export type User = {
   firstName: string;
@@ -50,37 +54,9 @@ class App extends React.Component<Props, State> {
       },
       alerts: []
     };
-    this.login = this.login.bind(this);
     this.getProfile = this.getProfile.bind(this);
     this.renderAlerts = this.renderAlerts.bind(this);
     this.update = this.update.bind(this);
-  }
-
-  async login(username: string, password: string) {
-    try {
-
-      const response = await axios.post("http://localhost:5000/login", {
-        username,
-        password
-      });
-      console.log(response);
-      if (response && response.status === 200) {
-        localStorage.setItem("access_token", response.data.token);
-        this.setState({
-          authenticated: true,
-          alerts: [{ type: "success", message: "Logged in successfully" }]
-        });
-      } else {
-        // handle others
-        this.setState({
-          alerts: [{ type: "danger", message: "Invalid username/password" }]
-        });
-      }
-    } catch (err) {
-      this.setState({
-        alerts: [{ type: "danger", message: "Invalid username/password" }]
-      });
-    }
   }
 
   async getProfile() {
@@ -142,14 +118,19 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App" style={{ height: "100%" }}>
         {this.renderAlerts()}
-        {this.state.authenticated ? (
+        {this.props.authenticated ? (
           <Profile update={this.update} getProfile={this.getProfile} />
         ) : (
-          <Login login={this.login} />
+          <Login />
         )}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state: AppState) => {
+  const { authenticated } = state;
+  return { authenticated };
+};
+
+export default connect(mapStateToProps, null)(App);

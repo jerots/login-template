@@ -1,9 +1,12 @@
 import React from "react";
 
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+import { connect } from "react-redux";
+import { login } from "../redux/actions";
 
 type Props = {
-  login: (username: string, password: string) => void;
+  login: (isLoggedIn: boolean) => void
 };
 
 type State = {
@@ -18,6 +21,33 @@ class Login extends React.Component<Props, State> {
       username: "",
       password: ""
     };
+    this.login = this.login.bind(this);
+  }
+
+  async login(username: string, password: string) {
+    try {
+      const response = await axios.post("http://localhost:5000/login", {
+        username,
+        password
+      });
+      console.log(response);
+      if (response && response.status === 200) {
+        localStorage.setItem("access_token", response.data.token);
+        this.props.login(true);
+        // this.setState({
+        //   alerts: [{ type: "success", message: "Logged in successfully" }]
+        // });
+      } else {
+        // handle others
+        // this.setState({
+        //   alerts: [{ type: "danger", message: "Invalid username/password" }]
+        // });
+      }
+    } catch (err) {
+      // this.setState({
+      //   alerts: [{ type: "danger", message: "Invalid username/password" }]
+      // });
+    }
   }
 
   handleUsernameChange(event: any) {
@@ -64,7 +94,7 @@ class Login extends React.Component<Props, State> {
               event: React.MouseEvent<HTMLButtonElement, MouseEvent>
             ) => {
               event.preventDefault();
-              this.props.login(this.state.username, this.state.password);
+              this.login(this.state.username, this.state.password);
             }}
           >
             Submit
@@ -87,4 +117,7 @@ const styles = {
   }
 };
 
-export default Login;
+export default connect(
+  null,
+  { login }
+)(Login);

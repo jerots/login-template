@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Form, Button } from "react-bootstrap";
-import { User } from "./App";
+import { User } from "../App";
 
 type Props = {
   update: (user: User) => void;
